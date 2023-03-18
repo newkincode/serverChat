@@ -1,0 +1,2 @@
+def opne():
+    print("server")
