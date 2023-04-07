@@ -49,7 +49,7 @@ def handle(client):
         try:
             msg = message = client.recv(1024)
 
-        except socket.error:
+        except:
             if client in clients:
                 index = clients.index(client)
                 # Index is used to remove client from list after getting disconnected
