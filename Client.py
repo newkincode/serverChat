@@ -1,14 +1,6 @@
 import socket
 import threading
 
-HOST = '127.0.0.1'
-PORT = 9999
-
-nickname = input("Choose your nickname: ")
-
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT))
-
 def receive():
     while True:
         try:
@@ -27,8 +19,18 @@ def write():
         message = f'{nickname}: {input("")}'
         client.send(message.encode('ascii'))
 
-receive_thread = threading.Thread(target=receive)
-receive_thread.start()
+print("1. connect server")
 
-write_thread = threading.Thread(target=write)
-write_thread.start()
+inp = int(input())
+if inp == 1:
+    HOST = input("ip: ")
+    PORT = int(input("port: "))
+    nickname = input("Choose your nickname: ")
+
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((HOST, PORT))
+    receive_thread = threading.Thread(target=receive)
+    receive_thread.start()
+
+    write_thread = threading.Thread(target=write)
+    write_thread.start()

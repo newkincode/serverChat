@@ -2,7 +2,7 @@ import socket
 import threading
 
 HOST = '127.0.0.1'
-PORT = 9999
+PORT = int(input("port: "))
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
@@ -19,12 +19,14 @@ def handle_client(client):
         try:
             message = client.recv(1024)
             broadcast(message)
+            print(message)
         except:
             index = clients.index(client)
             clients.remove(client)
             client.close()
             nickname = nicknames[index]
             broadcast(f'{nickname} left the chat!'.encode('ascii'))
+            print(f'{nickname} left the chat!'.encode('ascii'))
             nicknames.remove(nickname)
             break
 
