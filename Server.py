@@ -19,7 +19,6 @@ def handle_client(client):
         try:
             message = client.recv(1024)
             broadcast(message)
-            print(message)
         except:
             index = clients.index(client)
             clients.remove(client)
@@ -41,8 +40,8 @@ def receive():
         clients.append(client)
 
         print(f"Nickname of the client is {nickname}!")
-        broadcast(f'{nickname} joined the chat!'.encode('ascii'))
-        client.send('Connected to the server!'.encode('ascii'))
+        broadcast(f'{nickname} joined the chat!: '.encode('ascii'))
+        client.send('Connected to the server!: '.encode('ascii'))
 
         thread = threading.Thread(target=handle_client, args=(client,))
         thread.start()
